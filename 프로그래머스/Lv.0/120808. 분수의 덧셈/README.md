@@ -76,3 +76,8 @@
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
+
+## 문제 풀이
+분자와 분모의 최대 공약수를 구해서 각각 나누어 주기
+유클리드 호제법 :  num1 % num2 = r일때, gcd(num1, num2) = gcd(num2,r)과 같다.
+gcd(최대공약수)를 구해서 분자와 분모에 각각 나눠준다.!
