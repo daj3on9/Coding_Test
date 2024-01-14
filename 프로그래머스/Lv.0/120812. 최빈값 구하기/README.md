@@ -82,3 +82,33 @@
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
+>
+### 사용한 메소드
+- **forEach 메소드**
+    
+    배열을 순회하여 처리하는 메소드, 배열의 각 요소에 대해 주어진 함수를 순서대로 한 번씩 실행한다.
+    
+    해당 함수를 통해 배열의 요소를 접근하지 않고 간편하게 배열의 요소 처리 가능
+    
+    각 요소의 값 뿐만 아니라 인덱스와 배열 자체도 콜백 함수에서 사용 가능
+    
+    **주어진 함수는 배열의 크기만큼 반복 실행되며, 배열 요소의 개수에 따라 콜백 함수가 호출되는 횟수가 결정**
+    
+    ```jsx
+    arr.forEach(function(currentValue[, index[, array]]) {
+        // 실행할 코드
+    }[, thisArg]);
+    ```
+    
+    1. `arr`: `forEach()` 함수에 적용할 배열
+    2. `function`: `arr` 배열의 각 요소에 적용할 때 호출되는 콜백 함수입니다. 이 함수는 세 개의 매개변수를 가질 수 있습니다.
+        - `currentValue` (필수 값): 처리할 현재 요소. 이 매개변수를 통해 현재 요소에 접근 가능
+        - `index` (선택 사항): 처리할 현재 요소의 인덱스. 이 매개변수를 사용하여 현재 요소의 인덱스에 접근할 수 있습니다.
+        - `array` (선택 사항): `forEach()` 함수를 호출한 배열. 이 매개변수를 사용하여 원본 배열에 접근할 수 있습니다.
+    3. `thisArg` (선택 사항): `function`을 실행할 때 `this`로 사용할 객체. 이 매개변수는 필요에 따라 사용됩니다.
+    
+    반환 값은 항상 `undefined`
+    
+    참고 사이트 :
+    
+    [https://codingeverybody.kr/자바스크립트-foreach-함수/](https://codingeverybody.kr/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-foreach-%ED%95%A8%EC%88%98/)
