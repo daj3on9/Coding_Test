@@ -8,7 +8,7 @@ for i in range(t):
     level = deque((map(int, input().split())))
 
     cnt = 0
-    4
+    
     while level:
         if level[0] < max(level):
             level.rotate(-1)
