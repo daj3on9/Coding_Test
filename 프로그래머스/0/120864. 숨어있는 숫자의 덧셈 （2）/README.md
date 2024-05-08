@@ -70,4 +70,11 @@
 </ul>
 
 
+### 다른 사람 코드
+```
+def solution(my_string):
+    s = ''.join(i if i.isdigit() else ' ' for i in my_string)
+    return sum(int(i) for i in s.split())
+```
+
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
