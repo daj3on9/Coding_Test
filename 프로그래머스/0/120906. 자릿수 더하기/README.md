@@ -65,5 +65,11 @@
 <li>9 + 3 + 0 + 2 + 1 + 1 = 16을 return합니다.</li>
 </ul>
 
+### 다른 사람 코드
+```
+def solution(n):
+    return sum(int(i) for i in str(n))
+```
+
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
