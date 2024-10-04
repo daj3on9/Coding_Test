@@ -5,8 +5,6 @@ def solution(progresses, speeds):
     answer = []
     remain = deque()
     
-    cnt = 1
-    
     for i in range(len(progresses)):
         x  = math.ceil((100 - progresses[i])/speeds[i])
         remain.append(x)
