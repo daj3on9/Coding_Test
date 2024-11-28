@@ -1,51 +1,56 @@
-def dfs(y_count):
-    global cnt
+import sys
+input = sys.stdin.readline
 
-    # 'Y'가 4명 이상이면 조합이 불가능
-    if y_count >= 4:
+def dfs(yCnt):
+    global candidate
+
+    # 임도‘연’파 학생수 체크
+    if yCnt >= 4:
         return
 
-    # 7명이 선택되었을 때 조건 확인
-    if len(princess) == 7:
-        # 이미 확인된 조합인지 체크
-        if tuple(sorted(princess)) not in visited:
-            visited.add(tuple(sorted(princess)))
-            cnt += 1
+    # 조건에 만족하는 칠공주 모이면
+    if len(candidate) == 7:
+        members.add(tuple(sorted(candidate)))
         return
 
-    # 현재 공주 그룹에 포함된 모든 좌표를 기준으로 탐색
-    for x, y in princess:
+    # 이미 확인한 후보 경우이면 리턴
+    if tuple(sorted(candidate)) in visited:
+        return
+
+    # 각 위치에서 4방향 탐색으로 인접한 모든 경우 찾기
+    for x, y in candidate:
         for k in range(4):
-            nx, ny = x + dx[k], y + dy[k]
+            ni = x + di[k]
+            nj = y + dj[k]
+            if 0 <= ni < 5 and 0 <= nj < 5 and (ni, nj) not in candidate:
+                # 임도‘연’파 변화 저장
+                newY = yCnt
+                if students[ni][nj] == 'Y':
+                    newY += 1
+                candidate.append((ni,nj))
+                dfs(newY)
+                candidate.pop()
 
-            # 유효한 범위인지 확인 및 방문 여부 확인
-            if 0 <= nx < 5 and 0 <= ny < 5 and (nx, ny) not in princess:
-                princess.append((nx, ny))  # 후보군 추가
-                
-                # 'S' 또는 'Y' 여부에 따라 DFS 호출
-                if student[nx][ny] == 'S':
-                    dfs(y_count)
-                else:
-                    dfs(y_count + 1)
-
-                princess.pop()  # 후보군 제거 (백트래킹)
+    # 확인이 끝난 후보들 방문 체크
+    # 탐색이 끝나서 return되는 후보들
+    visited.add(tuple(sorted(candidate)))
 
 
-# 입력 및 초기 설정
-student = [list(input().strip()) for _ in range(5)]
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
+students = [input() for _ in range(5)]
+di = [0,1,0,-1]
+dj = [1,0,-1,0]
+# 7공주 가능한 경우 저장
+members = set()
+# 멤버 후보 방문 체크
+visited = set()
 
-cnt = 0  # 가능한 조합 수
-visited = set()  # 중복 조합 체크
-princess = []  # 현재 후보군
-
-# 'S'로 시작하는 모든 경우 탐색
 for i in range(5):
     for j in range(5):
-        if student[i][j] == 'S':
-            princess.append((i, j))
+        # 이다‘솜’파 이면 탐색
+        if students[i][j] == 'S':
+            # 멤버 선택
+            candidate = [(i, j)]
             dfs(0)
-            princess.pop()  # 백트래킹을 위해 초기화
 
-print(cnt)
+# ‘소문난 칠공주’ 모든 경우의 수
+print(len(members))
