@@ -1,20 +1,10 @@
 function solution(phone_book) {
-    let phoneMap = new Map();
+    phone_book.sort();
     
-    for(let phone of phone_book){
-        phoneMap.set(phone, true)
+    for(let i = 0; i < phone_book.length - 1; i++){
+        if(phone_book[i+1].startsWith(phone_book[i]))
+            return false;
     }
     
-    for (let phone of phone_book) {
-        let prefix = "";
-        
-        for (let num of phone) {
-            prefix += num;
-            if (prefix !== phone && phoneMap.has(prefix)) {
-                return false;
-            }
-        }
-    }
-
     return true;
 }
