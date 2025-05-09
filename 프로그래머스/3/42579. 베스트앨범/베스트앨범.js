@@ -1,19 +1,21 @@
 function solution(genres, plays) {
-  const genreMap = genres.reduce((map, genre, i) => {
-    if (!map.has(genre)) {
-      map.set(genre, { total: 0, songs: [] });
-    }
-    map.get(genre).total += plays[i];
-    map.get(genre).songs.push({ id: i, plays: plays[i] });
-    return map;
-  }, new Map());
+  const genrePlayMap = new Map(); 
+  const genreSongMap = new Map(); 
 
-  return [...genreMap.entries()]
-    .sort((a, b) => b[1].total - a[1].total) 
-    .flatMap(([_, data]) =>
-      data.songs
-        .sort((a, b) => b.plays - a.plays || a.id - b.id) 
+  
+  genres.forEach((genre, i) => {
+    genrePlayMap.set(genre, (genrePlayMap.get(genre) || 0) + plays[i]);
+
+    if (!genreSongMap.has(genre)) genreSongMap.set(genre, []);
+    genreSongMap.get(genre).push(i); 
+  });
+
+  return [...genrePlayMap.entries()]
+    .sort((a, b) => b[1] - a[1]) 
+    .flatMap(([genre]) =>
+      genreSongMap
+        .get(genre)
+        .sort((a, b) => plays[b] - plays[a] || a - b) 
         .slice(0, 2)
-        .map(song => song.id)
     );
 }
