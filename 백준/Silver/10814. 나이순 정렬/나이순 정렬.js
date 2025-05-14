@@ -7,9 +7,11 @@ const members = [];
 
 for (let i = 1; i <= N; i++) {
   const [age, name] = input[i].split(" ");
-  members.push({ age: +age, name: name });
+  members.push([+age, name]);
 }
 
-members.sort((a, b) => a.age - b.age);
+members.sort((a, b) => a[0] - b[0]);
 
-members.forEach((member) => console.log(`${member.age} ${member.name}`));
+const answer = members.map((member) => `${member[0]} ${member[1]}`).join("\n");
+
+console.log(answer);
