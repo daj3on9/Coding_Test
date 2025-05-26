@@ -1,8 +1,8 @@
 function solution(begin, target, words) {
     if(!words.includes(target)) return 0;
     
-    let queue = [[begin, 0]]; // 현재 단어부터 시작, 변환 단계 저장
-    let visited = new Set(); // 중복 값이 없도록
+    let queue = [[begin, 0]];
+    let visited = new Set(); 
     
     visited.add(begin)
     
@@ -12,10 +12,9 @@ function solution(begin, target, words) {
         if(current === target) return steps
         
         for(let word of words){
-            // 방문하지 않았으면서 한 개의 단어만 다를때
             if(!visited.has(word) && isOneLetterDifferent(current, word)){
-                visited.add(word); // 방문 처리
-                queue.push([word, steps + 1]); // 변환 단계 증가
+                visited.add(word); 
+                queue.push([word, steps + 1]);
             }
         }
     }
